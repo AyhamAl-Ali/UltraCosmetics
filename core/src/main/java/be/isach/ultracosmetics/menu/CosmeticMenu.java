@@ -10,6 +10,7 @@ import be.isach.ultracosmetics.cosmetics.type.CosmeticMatType;
 import be.isach.ultracosmetics.player.UltraPlayer;
 import be.isach.ultracosmetics.util.ItemFactory;
 import be.isach.ultracosmetics.util.UCMaterial;
+import com.udojava.evalex.Expression;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -21,6 +22,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * A cosmetic menu.
  *
@@ -28,12 +30,17 @@ import java.util.List;
  * @since 08-09-2016
  */
 public abstract class CosmeticMenu<T extends CosmeticMatType> extends Menu {
-
+    
+    /*
     public final static int[] COSMETICS_SLOTS = {
             10, 11, 12, 13, 14, 15, 16,
             19, 20, 21, 22, 23, 24, 25,
             28, 29, 30, 31, 32, 33, 34
     };
+    */
+    
+    public static List<Integer> COSMETICS_SLOTS = UltraCosmeticsData.get().getPlugin().getConfig().getIntegerList("Category-Menu-Slots-Pattern");
+ ;
 
 
     private Category category;
@@ -86,7 +93,7 @@ public abstract class CosmeticMenu<T extends CosmeticMatType> extends Menu {
                 List<String> npLore = SettingsManager.getConfig().getStringList("No-Permission.Custom-Item.Lore");
                 String[] array = new String[npLore.size()];
                 npLore.toArray(array);
-                putItem(inventory, COSMETICS_SLOTS[i], ItemFactory.create(material, name, array), clickData -> {
+                putItem(inventory, COSMETICS_SLOTS.get(i), ItemFactory.create(material, name, array), clickData -> {
                     Player clicker = clickData.getClicker().getBukkitPlayer();
                     clicker.sendMessage(MessageManager.getMessage("No-Permission"));
                     clicker.closeInventory();
@@ -127,7 +134,7 @@ public abstract class CosmeticMenu<T extends CosmeticMatType> extends Menu {
 
             is.setItemMeta(itemMeta);
             is = filterItem(is, cosmeticMatType, player);
-            putItem(inventory, COSMETICS_SLOTS[i], is, (data) -> {
+            putItem(inventory, COSMETICS_SLOTS.get(i), is, (data) -> {
                 UltraPlayer ultraPlayer = data.getClicker();
                 ItemStack clicked = data.getClicked();
                 int currentPage = getCurrentPage(ultraPlayer);
@@ -199,21 +206,54 @@ public abstract class CosmeticMenu<T extends CosmeticMatType> extends Menu {
         // Previous page item.
         if (page > 1) {
             int finalPage = page;
-            putItem(inventory, getSize() - 18, ItemFactory.rename(ItemFactory.getItemStackFromConfig("Categories.Previous-Page-Item"),
+
+            String slotFromConfig = UltraCosmeticsData.get().getPlugin().getConfig().getString("Categories.Previous-Page-Slot");
+            int slot;
+            if (slotFromConfig.contains("%size%")) {
+                String slotToEval = slotFromConfig.replaceAll("%size%", getSize() + "");
+                Expression expression = new Expression(slotToEval);
+                slot = expression.eval().intValue();
+            } else {
+                slot = Integer.parseInt(slotFromConfig);
+            }
+
+            putItem(inventory, slot, ItemFactory.rename(ItemFactory.getItemStackFromConfig("Categories.Previous-Page-Item"),
                     MessageManager.getMessage("Menu.Previous-Page")), (data) -> open(player, finalPage - 1));
         }
 
         // Next page item.
         if (page < getMaxPages()) {
             int finalPage = page;
-            putItem(inventory, getSize() - 10, ItemFactory.rename(ItemFactory.getItemStackFromConfig("Categories.Next-Page-Item"),
+
+            String slotFromConfig = UltraCosmeticsData.get().getPlugin().getConfig().getString("Categories.Next-Page-Slot");
+            int slot;
+            if (slotFromConfig.contains("%size%")) {
+                String slotToEval = slotFromConfig.replaceAll("%size%", getSize() + "");
+                Expression expression = new Expression(slotToEval);
+                slot = expression.eval().intValue();
+            } else {
+                slot = Integer.parseInt(slotFromConfig);
+            }
+
+            putItem(inventory, slot, ItemFactory.rename(ItemFactory.getItemStackFromConfig("Categories.Next-Page-Item"),
                     MessageManager.getMessage("Menu.Next-Page")), (data) -> open(player, finalPage + 1));
         }
 
         // Clear cosmetic item.
         String message = MessageManager.getMessage(category.getClearConfigPath());
         ItemStack itemStack = ItemFactory.rename(ItemFactory.getItemStackFromConfig("Categories.Clear-Cosmetic-Item"), message);
-        putItem(inventory, inventory.getSize() - 4, itemStack, data -> {
+
+        String slotFromConfig = UltraCosmeticsData.get().getPlugin().getConfig().getString("Categories.Clear-Cosmetics-Slot");
+        int clearSlot;
+        if (slotFromConfig.contains("%size%")) {
+            String slotToEval = slotFromConfig.replaceAll("%size%", getSize() + "");
+            Expression expression = new Expression(slotToEval);
+            clearSlot = expression.eval().intValue();
+        } else {
+            clearSlot = Integer.parseInt(slotFromConfig);
+        }
+
+        putItem(inventory, clearSlot, itemStack, data -> {
             toggleOff(player);
             open(player, getCurrentPage(player));
         });
@@ -221,7 +261,18 @@ public abstract class CosmeticMenu<T extends CosmeticMatType> extends Menu {
         // Go Back to Main Menu Arrow.
         if (getCategory().hasGoBackArrow()) {
             ItemStack item = ItemFactory.rename(ItemFactory.getItemStackFromConfig("Categories.Back-Main-Menu-Item"), MessageManager.getMessage("Menu.Main-Menu"));
-            putItem(inventory, inventory.getSize() - 6, item, (data) -> getUltraCosmetics().openMainMenu(player));
+
+            String backSlotFromConfig = UltraCosmeticsData.get().getPlugin().getConfig().getString("Categories.Clear-Cosmetics-Slot");
+            int slot;
+            if (backSlotFromConfig.contains("%size%")) {
+                String slotToEval = backSlotFromConfig.replaceAll("%size%", getSize() + "");
+                Expression expression = new Expression(slotToEval);
+                slot = expression.eval().intValue();
+            } else {
+                slot = Integer.parseInt(backSlotFromConfig);
+            }
+
+            putItem(inventory, slot, item, (data) -> getUltraCosmetics().openMainMenu(player));
         }
 
         putItems(inventory, player, page);

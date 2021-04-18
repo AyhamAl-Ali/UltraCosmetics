@@ -76,8 +76,12 @@ public class MenuMain extends Menu {
     protected void putItems(Inventory inventory, UltraPlayer player) {
         if (Category.enabledSize() > 0) {
             for (int i = 0; i < Category.enabledSize(); i++) {
-                int slot = layout[i];
                 Category category = Category.enabled().get(i);
+
+                int slot;
+                if (category.getSlot() != null) { slot = category.getSlot(); }
+                else { slot = layout[i]; } // default
+
                 putItem(inventory, slot, category.getItemStack(), data -> {
                     category.getMenu(getUltraCosmetics()).open(player);
                 });
@@ -87,7 +91,9 @@ public class MenuMain extends Menu {
         // Clear cosmetics item.
         String message = MessageManager.getMessage("Clear-Cosmetics");
         ItemStack itemStack = ItemFactory.rename(ItemFactory.getItemStackFromConfig("Categories.Clear-Cosmetic-Item"), message);
-        putItem(inventory, inventory.getSize() - 5, itemStack, data -> {
+        int slot = UltraCosmeticsData.get().getPlugin().getConfig().getInt("Categories.Clear-Cosmetic-Item-Slot");
+
+        putItem(inventory, slot, itemStack, data -> {
             player.clear();
             open(player);
         });

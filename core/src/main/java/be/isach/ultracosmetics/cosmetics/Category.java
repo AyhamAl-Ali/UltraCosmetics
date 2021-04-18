@@ -132,6 +132,11 @@ public enum Category {
     private ItemStack is;
 
     /**
+     * The Slot of the category in Main Menu.
+     */
+    private Integer slot; // Integer allows checking if slot == null
+
+    /**
      * Message on menu to activate a cosmetic of this category.
      */
     private String activateMenu;
@@ -171,6 +176,8 @@ public enum Category {
         this.chatPlaceholder = chatPlaceholder;
         this.activateConfig = activateConfig;
         this.deactivateConfig = deactivateConfig;
+        this.slot = UltraCosmeticsData.get().getPlugin().getConfig().getInt("Categories." + configPath + ".Main-Menu-Item-Slot");
+
         if (SettingsManager.getConfig().contains("Categories." + configPath + ".Main-Menu-Item")) {
             this.is = ItemFactory.getItemStackFromConfig("Categories." + configPath + ".Main-Menu-Item");
         } else {
@@ -191,6 +198,10 @@ public enum Category {
      */
     public ItemStack getItemStack() {
         return is;
+    }
+
+    public Integer getSlot() {
+        return slot;
     }
 
     /**

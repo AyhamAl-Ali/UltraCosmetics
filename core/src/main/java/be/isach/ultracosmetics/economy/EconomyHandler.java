@@ -26,7 +26,7 @@ public class EconomyHandler {
             economyHook = new VaultHook(ultraCosmetics);
             usingEconomy = true;
         } else if (economy.equalsIgnoreCase("playerpoints")) {
-            economyHook = new PlayerPointsHook(ultraCosmetics);
+            //economyHook = new PlayerPointsHook(ultraCosmetics);
             usingEconomy = true;
         } else {
             ultraCosmetics.getSmartLogger().write("Unknown economy: '" + economy + "'. Valid economies: Vault, PlayerPoints.");

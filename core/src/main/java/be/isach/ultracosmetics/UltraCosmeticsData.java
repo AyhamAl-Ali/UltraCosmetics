@@ -163,7 +163,12 @@ public class UltraCosmeticsData {
     }
 
     public void initConfigFields() {
-        this.fileStorage = SettingsManager.getConfig().getString("Ammo-System-For-Gadgets.System").equalsIgnoreCase("file");
+        if (SettingsManager.getConfig().getString("Ammo-System-For-Gadgets.System") != null) {
+            this.fileStorage = SettingsManager.getConfig().getString("Ammo-System-For-Gadgets.System").equalsIgnoreCase("file");
+        } else {
+            this.fileStorage = true;
+        }
+
         this.placeHolderColor = SettingsManager.getConfig().getBoolean("Chat-Cosmetic-PlaceHolder-Color");
         this.ammoEnabled = SettingsManager.getConfig().getBoolean("Ammo-System-For-Gadgets.Enabled");
         this.cooldownInBar = SettingsManager.getConfig().getBoolean("Categories.Gadgets.Cooldown-In-ActionBar");

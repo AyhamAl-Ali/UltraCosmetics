@@ -1,5 +1,5 @@
 name: UltraCosmetics
-version: @VERSION@
+version: @VERSION@-AYHAM
 author: iSach
 load: POSTWORLD
 main: be.isach.ultracosmetics.UltraCosmetics

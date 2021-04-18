@@ -47,7 +47,8 @@ public class MenuPets extends CosmeticMenu<PetType> {
     private void addPetRenameItem(Inventory inventory, UltraPlayer player) {
         if (SettingsManager.getConfig().getBoolean("Pets-Rename.Enabled")) {
             ItemStack stack;
-            int slot = inventory.getSize() - (getCategory().hasGoBackArrow() ? 5 : 6);
+            //int slot = inventory.getSize() - (getCategory().hasGoBackArrow() ? 5 : 6);
+            int slot = UltraCosmeticsData.get().getPlugin().getConfig().getInt("Pets-Rename.Slot");
             ClickRunnable run;
             if (SettingsManager.getConfig().getBoolean("Pets-Rename.Permission-Required")) {
                 if (player.hasPermission("ultracosmetics.pets.rename")) {

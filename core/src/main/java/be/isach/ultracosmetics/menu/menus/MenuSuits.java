@@ -14,6 +14,7 @@ import be.isach.ultracosmetics.player.UltraPlayer;
 import be.isach.ultracosmetics.util.ItemFactory;
 import be.isach.ultracosmetics.util.MathUtils;
 import be.isach.ultracosmetics.util.UCMaterial;
+import com.udojava.evalex.Expression;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
@@ -35,7 +36,9 @@ import java.util.List;
  */
 public final class MenuSuits extends CosmeticMenu<SuitType> {
 
-    private static final int[] SLOTS = new int[]{10, 11, 12, 13, 14, 15, 16, 17};
+    //private static final int[] SLOTS = new int[]{10, 11, 12, 13, 14, 15, 16, 17};
+    private static List<Integer> SLOTS = UltraCosmeticsData.get().getPlugin().getConfig().getIntegerList("Suits-Menu.Slots-Pattern");
+
     private static final Category CATEGORY = Category.SUITS;
 
     public MenuSuits(UltraCosmetics ultraCosmetics) {
@@ -77,7 +80,7 @@ public final class MenuSuits extends CosmeticMenu<SuitType> {
             wholeEquipMeta.setDisplayName(CATEGORY.getActivateMenu() + " " + MessageManager.getMessage("Suits." + suitType.getConfigName() + ".whole-equip"));
             wholeEquipMeta.setLore(Arrays.asList("", MessageManager.getMessage("Suits.Whole-Equip-Lore"), ""));
             wholeEquipStack.setItemMeta(wholeEquipMeta);
-            putItem(inventory, SLOTS[i] - 9, wholeEquipStack, clickData -> {
+            putItem(inventory, SLOTS.get(i) - 9, wholeEquipStack, clickData -> {
                 for (ArmorSlot armorSlot : ArmorSlot.values()) {
                     if (player.hasPermission(suitType.getPermission(armorSlot))) {
                         if (player.getSuit(armorSlot) != null
@@ -98,7 +101,7 @@ public final class MenuSuits extends CosmeticMenu<SuitType> {
             for (int l = 0; l < 4; l++) {
                 ArmorSlot armorSlot = ArmorSlot.values()[l];
                 Suit suit = player.getSuit(armorSlot);
-                int slot = SLOTS[i] + l * 9;
+                int slot = SLOTS.get(i) + l * 9;
 
                 if (SettingsManager.getConfig().getBoolean("No-Permission.Dont-Show-Item")) {
                     if (!player.hasPermission(suitType.getPermission(armorSlot))) {
@@ -115,7 +118,7 @@ public final class MenuSuits extends CosmeticMenu<SuitType> {
                     List<String> npLore = SettingsManager.getConfig().getStringList("No-Permission.Custom-Item.Lore");
                     String[] array = new String[npLore.size()];
                     npLore.toArray(array);
-                    putItem(inventory, COSMETICS_SLOTS[i], ItemFactory.create(material, name, array), clickData -> {
+                    putItem(inventory, COSMETICS_SLOTS.get(i), ItemFactory.create(material, name, array), clickData -> {
                         Player clicker = clickData.getClicker().getBukkitPlayer();
                         clicker.sendMessage(MessageManager.getMessage("No-Permission"));
                         clicker.closeInventory();
@@ -212,6 +215,9 @@ public final class MenuSuits extends CosmeticMenu<SuitType> {
         // Previous page item.
         if (page > 1) {
             int finalPage = page;
+
+            int slot = UltraCosmeticsData.get().getPlugin().getConfig().getInt("Suits-Menu.Previous-Page-Slot");
+
             putItem(inventory, getSize() - 9, ItemFactory.rename(ItemFactory.getItemStackFromConfig("Categories.Previous-Page-Item"),
                     MessageManager.getMessage("Menu.Previous-Page")), (data) -> open(player, finalPage - 1));
         }
@@ -219,7 +225,10 @@ public final class MenuSuits extends CosmeticMenu<SuitType> {
         // Next page item.
         if (page < getMaxPages()) {
             int finalPage = page;
-            putItem(inventory, getSize() - 1, ItemFactory.rename(ItemFactory.getItemStackFromConfig("Categories.Next-Page-Item"),
+
+            int slot = UltraCosmeticsData.get().getPlugin().getConfig().getInt("Suits-Menu.Next-Page-Slot");
+
+            putItem(inventory, slot, ItemFactory.rename(ItemFactory.getItemStackFromConfig("Categories.Next-Page-Item"),
                     MessageManager.getMessage("Menu.Next-Page")), (data) -> open(player, finalPage + 1));
         }
 
@@ -227,7 +236,10 @@ public final class MenuSuits extends CosmeticMenu<SuitType> {
         String message = MessageManager.getMessage(CATEGORY.getClearConfigPath());
         ItemStack itemStack = ItemFactory.rename(ItemFactory.getItemStackFromConfig("Categories.Clear-Cosmetic-Item"), message);
         int finalPage1 = page;
-        putItem(inventory, inventory.getSize() - 4, itemStack, data -> {
+
+        int clearSlot = UltraCosmeticsData.get().getPlugin().getConfig().getInt("Suits-Menu.Next-Page-Slot");
+
+        putItem(inventory, clearSlot, itemStack, data -> {
             toggleOff(player);
             open(player, finalPage1);
         });
@@ -256,7 +268,10 @@ public final class MenuSuits extends CosmeticMenu<SuitType> {
         if (getCategory().hasGoBackArrow()) {
             String message = MessageManager.getMessage("Menu.Main-Menu");
             ItemStack item = ItemFactory.rename(ItemFactory.getItemStackFromConfig("Categories.Back-Main-Menu-Item"), message);
-            putItem(inventory, inventory.getSize() - 6, item, (data) -> getUltraCosmetics().openMainMenu(ultraPlayer));
+
+            int slot = UltraCosmeticsData.get().getPlugin().getConfig().getInt("Suits-Menu.Back-Main-Menu-Item-Slot");
+
+            putItem(inventory, slot, item, (data) -> getUltraCosmetics().openMainMenu(ultraPlayer));
         }
     }
 
