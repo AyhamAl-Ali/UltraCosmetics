@@ -136,3 +136,6 @@ testserver
 testserver/*
 
 hts*
+
+# Avoid ignoring libraries folder
+!libs/*
