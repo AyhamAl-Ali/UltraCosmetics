@@ -19,6 +19,7 @@ public abstract class SubCommand {
     String[] aliases;
     String description, permission, usage;
     private UltraCosmetics ultraCosmetics;
+    private CommandManager commandManager;
 
     public SubCommand(String description, String permission, String usage, UltraCosmetics ultraCosmetics, String... aliases) {
         this.aliases = aliases;

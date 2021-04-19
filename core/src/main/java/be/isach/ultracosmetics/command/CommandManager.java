@@ -3,7 +3,9 @@ package be.isach.ultracosmetics.command;
 import be.isach.ultracosmetics.UltraCosmetics;
 import be.isach.ultracosmetics.command.subcommands.*;
 import be.isach.ultracosmetics.config.MessageManager;
+import be.isach.ultracosmetics.menu.Menus;
 import be.isach.ultracosmetics.util.MathUtils;
+import be.isach.ultracosmetics.player.UltraPlayer;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -82,9 +84,16 @@ public class CommandManager implements CommandExecutor {
 			return false;
 		}
 		
-		if (arguments == null
-		    || arguments.length == 0) {
-			showHelp(sender, 1);
+		if (arguments == null || arguments.length == 0) {
+
+			if (sender instanceof Player) { // player
+				Menus menus = ultraCosmetics.getMenus();
+				UltraPlayer ultraPlayer = ultraCosmetics.getPlayerManager().getUltraPlayer((Player)sender);
+				menus.getMainMenu().open(ultraPlayer);
+			}
+			else { // console
+				showHelp(sender, 1);
+			}
 			return true;
 		}
 		
@@ -118,6 +127,7 @@ public class CommandManager implements CommandExecutor {
 	}
 	
 	public void registerCommands(UltraCosmetics ultraCosmetics) {
+		registerCommand(new SubCommandHelp(ultraCosmetics));
 		registerCommand(new SubCommandGadgets(ultraCosmetics));
 		registerCommand(new SubCommandSelfView(ultraCosmetics));
 		registerCommand(new SubCommandMenu(ultraCosmetics));
