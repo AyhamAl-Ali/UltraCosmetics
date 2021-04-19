@@ -40,7 +40,7 @@ public abstract class CosmeticMenu<T extends CosmeticMatType> extends Menu {
     */
     
     public static List<Integer> COSMETICS_SLOTS = UltraCosmeticsData.get().getPlugin().getConfig().getIntegerList("Category-Menu-Slots-Pattern");
- ;
+
 
 
     private Category category;
@@ -84,6 +84,9 @@ public abstract class CosmeticMenu<T extends CosmeticMatType> extends Menu {
                     && !player.hasPermission(cosmeticMatType.getPermission())) {
                 continue;
             }
+
+            // Update
+            COSMETICS_SLOTS = UltraCosmeticsData.get().getPlugin().getConfig().getIntegerList("Category-Menu-Slots-Pattern");
 
             if (SettingsManager.getConfig().getBoolean("No-Permission.Custom-Item.enabled")
                     && !player.hasPermission(cosmeticMatType.getPermission())) {
@@ -134,6 +137,7 @@ public abstract class CosmeticMenu<T extends CosmeticMatType> extends Menu {
 
             is.setItemMeta(itemMeta);
             is = filterItem(is, cosmeticMatType, player);
+
             putItem(inventory, COSMETICS_SLOTS.get(i), is, (data) -> {
                 UltraPlayer ultraPlayer = data.getClicker();
                 ItemStack clicked = data.getClicked();
@@ -262,7 +266,7 @@ public abstract class CosmeticMenu<T extends CosmeticMatType> extends Menu {
         if (getCategory().hasGoBackArrow()) {
             ItemStack item = ItemFactory.rename(ItemFactory.getItemStackFromConfig("Categories.Back-Main-Menu-Item"), MessageManager.getMessage("Menu.Main-Menu"));
 
-            String backSlotFromConfig = UltraCosmeticsData.get().getPlugin().getConfig().getString("Categories.Clear-Cosmetics-Slot");
+            String backSlotFromConfig = UltraCosmeticsData.get().getPlugin().getConfig().getString("Categories.Back-Main-Menu-Item-Slot");
             int slot;
             if (backSlotFromConfig.contains("%size%")) {
                 String slotToEval = backSlotFromConfig.replaceAll("%size%", getSize() + "");

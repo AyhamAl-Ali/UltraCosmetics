@@ -237,7 +237,7 @@ public final class MenuSuits extends CosmeticMenu<SuitType> {
         ItemStack itemStack = ItemFactory.rename(ItemFactory.getItemStackFromConfig("Categories.Clear-Cosmetic-Item"), message);
         int finalPage1 = page;
 
-        int clearSlot = UltraCosmeticsData.get().getPlugin().getConfig().getInt("Suits-Menu.Next-Page-Slot");
+        int clearSlot = UltraCosmeticsData.get().getPlugin().getConfig().getInt("Suits-Menu.Clear-Cosmetics-Slot");
 
         putItem(inventory, clearSlot, itemStack, data -> {
             toggleOff(player);

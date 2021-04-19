@@ -78,9 +78,11 @@ public class MenuMain extends Menu {
             for (int i = 0; i < Category.enabledSize(); i++) {
                 Category category = Category.enabled().get(i);
 
-                int slot;
-                if (category.getSlot() != null) { slot = category.getSlot(); }
-                else { slot = layout[i]; } // default
+                Integer slot;
+                slot = UltraCosmeticsData.get().getPlugin().getConfig().getInt("Categories." + category.getConfigPath() + ".Main-Menu-Item-Slot");
+                //if (category.getSlot() != null) { slot = category.getSlot(); }
+                //else { slot = layout[i]; } // default
+                if (slot == null) { slot = layout[i]; } // default
 
                 putItem(inventory, slot, category.getItemStack(), data -> {
                     category.getMenu(getUltraCosmetics()).open(player);

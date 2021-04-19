@@ -24,8 +24,8 @@ public class Version implements Comparable<Version> {
 
     @Override
     public int compareTo(Version otherVersion) {
-        String[] thisParts = this.get().split("\\.");
-        String[] thatParts = otherVersion.get().split("\\.");
+        String[] thisParts = this.get().replaceAll("-\\w+", "").split("\\.");
+        String[] thatParts = otherVersion.get().replaceAll("-\\w+", "").split("\\.");
         int length = Math.max(thisParts.length, thatParts.length);
         for (int i = 0; i < length; i++) {
             int thisPart = i < thisParts.length ?

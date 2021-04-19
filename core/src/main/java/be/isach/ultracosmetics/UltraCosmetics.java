@@ -24,6 +24,7 @@ import be.isach.ultracosmetics.run.MovingChecker;
 import be.isach.ultracosmetics.util.*;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
+import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -124,7 +125,7 @@ public class UltraCosmetics extends JavaPlugin {
         getSmartLogger().write("UltraCosmetics v" + getDescription().getVersion() + " is loading... (server: " + UltraCosmeticsData.get().getServerVersion().getName() + ")");
         getSmartLogger().write("Thanks for downloading it!");
         getSmartLogger().write("Plugin by iSach.");
-        getSmartLogger().write("Edited by AyhamAlali#2693 for Super#0001 (17th April 2021)");
+        getSmartLogger().write("Edited by AyhamAlali#2693 for Super (17th April 2021)");
         getSmartLogger().write("Link: http://bit.ly/UltraCosmetics");
 
         // Set up config.
@@ -435,8 +436,8 @@ public class UltraCosmetics extends JavaPlugin {
         file = new File(getDataFolder(), "config.yml");
 
         try {
-            config.save(file);
-        } catch (IOException e) {
+            config.load(file);
+        } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
         }
     }

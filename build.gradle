@@ -1,3 +1,16 @@
+buildscript {
+  repositories {
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
+  }
+  dependencies {
+    classpath "com.github.jengelman.gradle.plugins:shadow:6.1.0"
+  }
+}
+
+apply plugin: "com.github.johnrengelman.shadow"
+
 allprojects {
     apply plugin: 'java'
     apply plugin: 'eclipse'
@@ -36,6 +49,8 @@ allprojects {
         }
     }
 }
+
+
 
 // Useful for local testing, with a testserver folder containing your testing server
 boolean local = false
@@ -107,10 +122,20 @@ task jar116(type: Jar, dependsOn: supportfor116.collect { it + ":compileJava" })
     from files(supportfor116.collect { project(it).sourceSets.main.output })
 }
 dependencies {
+    compile fileTree(dir: 'libs', include: '*.jar')
+
     subprojects.each { p ->
         shaded(p) {
             transitive false
         }
+    }
+}
+
+
+shadowJar {
+    dependencies {
+        //include dependency("com.udojava:EvalEx:2.5")
+        include 'libs/EvalEx-2.5.jar'
     }
 }
 
@@ -121,14 +146,15 @@ subprojects {
         // Vault
         maven {
             url 'http://nexus.hc.to/content/repositories/pub_releases'
+            allowInsecureProtocol(true)
         }
         // Lib's Disguises
         maven {
-            url 'http://repo.md-5.net/content/groups/public/'
+            url 'https://repo.md-5.net/content/groups/public/'
         }
 
         maven {
-            url 'http://maven.elmakers.com/repository/'
+            url 'https://maven.elmakers.com/repository/'
         }
 
         maven {
@@ -146,12 +172,14 @@ subprojects {
 
         // PlaceholderAPI
         maven {
-            url 'http://repo.extendedclip.com/content/repositories/placeholderapi/'
+            url 'https://repo.extendedclip.com/content/repositories/placeholderapi/'
         }
 
         // PlayerPoints
         maven {
-            url 'https://repo.dakanilabs.com/repository/public/'
+            url 'http://repo.dakanilabs.com/repository/public/'
+            allowInsecureProtocol(true)
+
         }
         
         // Spigot for 1.16.4

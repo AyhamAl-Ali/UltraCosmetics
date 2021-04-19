@@ -11,6 +11,7 @@ import be.isach.ultracosmetics.menu.ClickRunnable;
 import be.isach.ultracosmetics.menu.CosmeticMenu;
 import be.isach.ultracosmetics.player.UltraPlayer;
 import be.isach.ultracosmetics.util.ItemFactory;
+import com.udojava.evalex.Expression;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -36,7 +37,17 @@ public class MenuGadgets extends CosmeticMenu<GadgetType> {
     }
 
     private void putToggleGadgetsItems(Inventory inventory, UltraPlayer player) {
-        int slot = inventory.getSize() - (getCategory().hasGoBackArrow() ? 5 : 6);
+        //int slot = inventory.getSize() - (getCategory().hasGoBackArrow() ? 5 : 6);
+        String slotFromConfig = UltraCosmeticsData.get().getPlugin().getConfig().getString("Categories.Disable-Gadgets-Item-Slot");
+        int slot;
+        if (slotFromConfig.contains("%size%")) {
+            String slotToEval = slotFromConfig.replaceAll("%size%", getSize() + "");
+            Expression expression = new Expression(slotToEval);
+            slot = expression.eval().intValue();
+        } else {
+            slot = Integer.parseInt(slotFromConfig);
+        }
+
         String configPath;
         boolean toggle;
         if (player.hasGadgetsEnabled()) {
