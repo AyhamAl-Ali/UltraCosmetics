@@ -17,7 +17,7 @@ import org.bukkit.entity.Player;
 public class SubCommandGadgets extends SubCommand {
 
     public SubCommandGadgets(UltraCosmetics ultraCosmetics) {
-        super("Toggle Gadgets", "ultracosmetics.command.gadgets", "/uc gadgets", ultraCosmetics, "gadgets");
+        super("Toggle Gadgets", "ultracosmetics.command.gadgets", "/cosmetics gadgets", ultraCosmetics, "gadgets");
     }
 
     @Override

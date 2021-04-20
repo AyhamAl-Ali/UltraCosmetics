@@ -26,7 +26,7 @@ public class SubCommandToggle extends SubCommand {
 
 
     public SubCommandToggle(UltraCosmetics ultraCosmetics) {
-        super("Toggles a cosmetic.", "ultracosmetics.command.toggle", "/uc toggle <type> <cosmetic> [player]", ultraCosmetics, "toggle");
+        super("Toggles a cosmetic.", "ultracosmetics.command.toggle", "/cosmetics toggle <type> <cosmetic> [player]", ultraCosmetics, "toggle");
     }
 
     @Override
@@ -69,7 +69,7 @@ public class SubCommandToggle extends SubCommand {
                             ArmorSlot armorSlot = ArmorSlot.getByName(args[2].split(":")[1]);
                             other.removeSuit(armorSlot);
                         } catch (Exception ex) {
-                            sender.sendMessage(MessageManager.getMessage("Prefix") + " §c§l/uc toggle suit <suit type:suit piece> <player>.");
+                            sender.sendMessage(MessageManager.getMessage("Prefix") + " §c§l/cosmetics toggle suit <suit type:suit piece> <player>.");
                             return;
                         }
                     } else {
@@ -86,7 +86,7 @@ public class SubCommandToggle extends SubCommand {
                             ArmorSlot armorSlot = ArmorSlot.getByName(args[2].split(":")[1]);
                             ultraPlayer.removeSuit(armorSlot);
                         } catch (Exception ex) {
-                            sender.sendMessage(MessageManager.getMessage("Prefix") + " §c§l/uc toggle suit <suit type:suit piece> <player>.");
+                            sender.sendMessage(MessageManager.getMessage("Prefix") + " §c§l/cosmetics toggle suit <suit type:suit piece> <player>.");
                         }
                     } else {
                         ultraPlayer.removeCosmetic(category);
@@ -106,7 +106,7 @@ public class SubCommandToggle extends SubCommand {
                                 SuitType suitType = SuitType.valueOf(cosm.split(":")[0]);
                                 suitType.equip(other, getUltraCosmetics(), armorSlot);
                             } catch (Exception ex) {
-                                sender.sendMessage(MessageManager.getMessage("Prefix") + " §c§l/uc toggle suit <suit type:suit piece> <player>.");
+                                sender.sendMessage(MessageManager.getMessage("Prefix") + " §c§l/cosmetics toggle suit <suit type:suit piece> <player>.");
                             }
                         } else {
                             cosmeticType.equip(other, getUltraCosmetics());
@@ -121,7 +121,7 @@ public class SubCommandToggle extends SubCommand {
                             SuitType suitType = SuitType.valueOf(args[2].split(":")[0]);
                             suitType.equip(ultraPlayer, getUltraCosmetics(), armorSlot);
                         } catch (Exception ex) {
-                            sender.sendMessage(MessageManager.getMessage("Prefix") + " §c§l/uc toggle suit <suit type:suit piece> <player>.");
+                            sender.sendMessage(MessageManager.getMessage("Prefix") + " §c§l/cosmetics toggle suit <suit type:suit piece> <player>.");
                         }
                     } else {
                         cosmeticType.equip(ultraPlayer, getUltraCosmetics());
@@ -138,7 +138,7 @@ public class SubCommandToggle extends SubCommand {
     @Override
     protected void onExeConsole(ConsoleCommandSender sender, String... args) {
         if (args.length < 4) {
-            sender.sendMessage(MessageManager.getMessage("Prefix") + " §c§l/uc toggle <type> <cosmetic> <player>");
+            sender.sendMessage(MessageManager.getMessage("Prefix") + " §c§l/cosmetics toggle <type> <cosmetic> <player>");
             return;
         }
 
@@ -165,7 +165,7 @@ public class SubCommandToggle extends SubCommand {
                         ArmorSlot armorSlot = ArmorSlot.getByName(args[2].split(":")[1]);
                         other.removeSuit(armorSlot);
                     } catch (Exception ex) {
-                        sender.sendMessage(MessageManager.getMessage("Prefix") + " §c§l/uc toggle suit <suit type:suit piece> <player>.");
+                        sender.sendMessage(MessageManager.getMessage("Prefix") + " §c§l/cosmetics toggle suit <suit type:suit piece> <player>.");
                         return;
                     }
                 } else {
@@ -186,7 +186,7 @@ public class SubCommandToggle extends SubCommand {
                             SuitType suitType = SuitType.valueOf(args[2].split(":")[0]);
                             suitType.equip(other, getUltraCosmetics(), armorSlot);
                         } catch (Exception ex) {
-                            sender.sendMessage(MessageManager.getMessage("Prefix") + " §c§l/uc toggle suit <suit type:suit piece> <player>.");
+                            sender.sendMessage(MessageManager.getMessage("Prefix") + " §c§l/cosmetics toggle suit <suit type:suit piece> <player>.");
                         }
                     } else {
                         cosmeticType.equip(other, getUltraCosmetics());

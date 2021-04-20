@@ -24,7 +24,7 @@ public class UCTabCompleter implements TabCompleter {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-        if (cmd.getName().equalsIgnoreCase("uc") || cmd.getName().equalsIgnoreCase("ultracosmetics")) {
+        if (cmd.getName().equalsIgnoreCase("cosmetic") || cmd.getName().equalsIgnoreCase("cosmetics")) {
             if (args.length == 1) {
                 List<String> commands = new ArrayList<>();
                 for (SubCommand sc : uc.getCommandManager().getCommands()) {

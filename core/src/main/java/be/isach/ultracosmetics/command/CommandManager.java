@@ -33,10 +33,10 @@ public class CommandManager implements CommandExecutor {
 	
 	public CommandManager(UltraCosmetics ultraCosmetics) {
 		this.ultraCosmetics = ultraCosmetics;
-		this.ultraCosmetics.getServer().getPluginCommand("ultracosmetics").setExecutor(this);
-		this.ultraCosmetics.getServer().getPluginCommand("ultracosmetics").setTabCompleter(new UCTabCompleter(ultraCosmetics));
-		String[] aliases = { "uc", "cosmetics" };
-		this.ultraCosmetics.getServer().getPluginCommand("ultracosmetics").setAliases(Arrays.asList(aliases));
+		this.ultraCosmetics.getServer().getPluginCommand("cosmetics").setExecutor(this);
+		this.ultraCosmetics.getServer().getPluginCommand("cosmetics").setTabCompleter(new UCTabCompleter(ultraCosmetics));
+		String[] aliases = { "cosmetic" };
+		this.ultraCosmetics.getServer().getPluginCommand("cosmetics").setAliases(Arrays.asList(aliases));
 	}
 	
 	/**
@@ -50,7 +50,7 @@ public class CommandManager implements CommandExecutor {
 	
 	public void showHelp(CommandSender commandSender, int page) {
 		commandSender.sendMessage("");
-		commandSender.sendMessage(ChatColor.WHITE + "" + ChatColor.BOLD + "UltraCosmetics Help (/uc <page>) " + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "(" + page + "/" + getMaxPages() + ")");
+		commandSender.sendMessage(ChatColor.WHITE + "" + ChatColor.BOLD + "CustomCosmetics Help (/cosmetics <page>) " + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "(" + page + "/" + getMaxPages() + ")");
 		int from = 1;
 		if (page > 1)
 			from = 8 * (page - 1) + 1;

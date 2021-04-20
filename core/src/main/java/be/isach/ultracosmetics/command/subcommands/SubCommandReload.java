@@ -23,7 +23,7 @@ import org.bukkit.entity.Player;
 public class SubCommandReload extends SubCommand {
 
     public SubCommandReload(UltraCosmetics ultraCosmetics) {
-        super("Reload config", "ultracosmetics.command.reload", "/uc reload", ultraCosmetics, "reload");
+        super("Reload config", "ultracosmetics.command.reload", "/cosmetics reload", ultraCosmetics, "reload");
         //this.menuGadgets = new MenuGadgets(getUltraCosmetics());
     }
 

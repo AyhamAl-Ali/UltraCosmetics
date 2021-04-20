@@ -23,6 +23,7 @@ Categories:
     # You wanna show the cooldown of current gadget in actionbar?
     Cooldown-In-ActionBar: true
     Main-Menu-Item-Slot: 13
+    Disable-Gadgets-Item-Slot: "%size% - 5"
   Particle-Effects:
     Main-Menu-Item: '399:0'
     Go-Back-Arrow: true

@@ -378,6 +378,8 @@ public class UltraCosmetics extends JavaPlugin {
 
         }
 
+        config.addDefault("Categories.Gadgets.Disable-Gadgets-Item-Slot", "%size% - 5", "%size% = inventory size");
+
         config.addDefault("Categories.Next-Page-Slot", "%size% - 10", "%size% = inventory size");
         config.addDefault("Categories.Previous-Page-Slot", "%size% - 18", "%size% = inventory size");
         config.addDefault("Categories.Clear-Cosmetics-Slot", "%size% - 4", "%size% = inventory size");

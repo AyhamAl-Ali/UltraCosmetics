@@ -18,7 +18,7 @@ import org.bukkit.entity.Player;
 public class SubCommandHelp extends SubCommand {
 
     public SubCommandHelp(UltraCosmetics ultraCosmetics) {
-        super("Shows help message", "ultracosmetics.command.help", "/uc help", ultraCosmetics, "help");
+        super("Shows help message", "ultracosmetics.command.help", "/cosmetics help", ultraCosmetics, "help");
         //this.menuGadgets = new MenuGadgets(getUltraCosmetics());
     }
 

@@ -26,7 +26,7 @@ import java.util.UUID;
 public class SubCommandGive extends SubCommand {
 
     public SubCommandGive(UltraCosmetics ultraCosmetics) {
-        super("Gives Ammo/Key.", "ultracosmetics.command.give", "/uc give <key|ammo> <amount> [player]", ultraCosmetics, "give");
+        super("Gives Ammo/Key.", "ultracosmetics.command.give", "/cosmetics give <key|ammo> <amount> [player]", ultraCosmetics, "give");
     }
 
     @Override
@@ -34,9 +34,9 @@ public class SubCommandGive extends SubCommand {
         if (args.length < 3) {
             if (args.length == 2) {
                 if (args[1].startsWith("k"))
-                    sender.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Incorrect Usage. /uc give key <amount> [player]");
+                    sender.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Incorrect Usage. /cosmetics give key <amount> [player]");
                 else if (args[1].startsWith("a"))
-                    sender.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Incorrect Usage. /uc give ammo <gadget> <amount> [player]");
+                    sender.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Incorrect Usage. /cosmetics give ammo <gadget> <amount> [player]");
             } else
                 sender.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Incorrect Usage. " + getUsage());
             return;
@@ -78,9 +78,9 @@ public class SubCommandGive extends SubCommand {
 
             sender.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + keys + " treasure keys given to " + receiver.getName());
 
-        } else if (arg1.startsWith("a")) { // Giving ammo. /uc give ammo <type> <amount> [player]
+        } else if (arg1.startsWith("a")) { // Giving ammo. /cosmetics give ammo <type> <amount> [player]
             if (args.length < 4) {
-                sender.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Incorrect Usage. /uc give ammo <gadget> <amount> [player]");
+                sender.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Incorrect Usage. /cosmetics give ammo <gadget> <amount> [player]");
                 return;
             }
             if (args.length > 4) {
@@ -136,9 +136,9 @@ public class SubCommandGive extends SubCommand {
         if (args.length < 4) {
             if (args.length == 2) {
                 if (args[1].startsWith("k"))
-                    sender.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Incorrect Usage. /uc give key <amount> <player>");
+                    sender.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Incorrect Usage. /cosmetics give key <amount> <player>");
                 else if (args[1].startsWith("a"))
-                    sender.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Incorrect Usage. /uc give ammo <gadget> <amount> <player>");
+                    sender.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Incorrect Usage. /cosmetics give ammo <gadget> <amount> <player>");
             } else
                 sender.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Incorrect Usage. " + getUsage());
             return;
@@ -178,7 +178,7 @@ public class SubCommandGive extends SubCommand {
 
         } else if (arg1.startsWith("a")) {
             if (args.length < 5) {
-                sender.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Incorrect Usage. /uc give ammo <gadget> <amount> <player>");
+                sender.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Incorrect Usage. /cosmetics give ammo <gadget> <amount> <player>");
                 return;
             }
             receiver = Bukkit.getPlayer(args[4]);
@@ -226,7 +226,7 @@ public class SubCommandGive extends SubCommand {
             addAmmo(gadgetType, receiver, ammo);
             sender.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + ammo + " " + gadgetType.toString().toLowerCase() + " ammo given to " + receiver.getName());
         } else {
-            sender.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Incorrect Usage. /uc give <key|ammo> <amount> <player>");
+            sender.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Incorrect Usage. /cosmetics give <key|ammo> <amount> <player>");
         }
     }
 

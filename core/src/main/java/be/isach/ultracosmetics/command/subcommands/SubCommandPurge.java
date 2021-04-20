@@ -20,7 +20,7 @@ import java.io.File;
 public class SubCommandPurge extends SubCommand {
 	
 	public SubCommandPurge(UltraCosmetics ultraCosmetics) {
-		super("Purges old data files.", "ultracosmetics.command.purge", "/uc purge <confirm>", ultraCosmetics, "purge");
+		super("Purges old data files.", "ultracosmetics.command.purge", "/cosmetics purge <confirm>", ultraCosmetics, "purge");
 	}
 	
 	@Override
@@ -36,7 +36,7 @@ public class SubCommandPurge extends SubCommand {
 	private void common(CommandSender sender, String... args) {
 		if (args.length < 2) {
 			sender.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Are you sure you want to purge old player data files? Depending on the amount of data files you have, this may lag your server for a noticable amount of time.");
-			sender.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "To confirm purge of playerdata that doesn't contain treasure keys or pet names, type /uc purge confirm");
+			sender.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "To confirm purge of playerdata that doesn't contain treasure keys or pet names, type /cosmetics purge confirm");
 			return;
 		}
 		if (args[1].equalsIgnoreCase("confirm")) {
@@ -64,7 +64,7 @@ public class SubCommandPurge extends SubCommand {
 			});
 		} else {
 			sender.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Are you sure you want to purge old player data files? Depending on the amount of data files you have, this may lag your server for a noticable amount of time.");
-			sender.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "To confirm purge of playerdata that doesn't contain treasure keys or pet names, type /uc purge confirm");
+			sender.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "To confirm purge of playerdata that doesn't contain treasure keys or pet names, type /cosmetics purge confirm");
 		}
 	}
 }

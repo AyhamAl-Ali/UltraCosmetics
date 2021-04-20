@@ -19,7 +19,7 @@ import org.bukkit.entity.Player;
 public class SubCommandClear extends SubCommand {
 
     public SubCommandClear(UltraCosmetics ultraCosmetics) {
-        super("Clears a Cosmetic.", "ultracosmetics.command.clear", "/uc clear <player> [type]", ultraCosmetics, "clear");
+        super("Clears a Cosmetic.", "ultracosmetics.command.clear", "/cosmetics clear <player> [type]", ultraCosmetics, "clear");
     }
 
     @Override
@@ -64,7 +64,7 @@ public class SubCommandClear extends SubCommand {
         else if (s.startsWith("mou")) up.removeMount();
         else if (s.startsWith("e")) up.removeEmote();
         else {
-            sender.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "/uc clear <player> <type>\n" + ChatColor.RED + "" + ChatColor.BOLD + "Invalid Type.\n" + ChatColor.RED + "" + ChatColor.BOLD + "Available types: gadgets, particleeffects, pets, mounts, suits, hats, morphs");
+            sender.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "/cosmetics clear <player> <type>\n" + ChatColor.RED + "" + ChatColor.BOLD + "Invalid Type.\n" + ChatColor.RED + "" + ChatColor.BOLD + "Available types: gadgets, particleeffects, pets, mounts, suits, hats, morphs");
         }
     }
 }

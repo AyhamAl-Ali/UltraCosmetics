@@ -38,7 +38,7 @@ public class MenuGadgets extends CosmeticMenu<GadgetType> {
 
     private void putToggleGadgetsItems(Inventory inventory, UltraPlayer player) {
         //int slot = inventory.getSize() - (getCategory().hasGoBackArrow() ? 5 : 6);
-        String slotFromConfig = UltraCosmeticsData.get().getPlugin().getConfig().getString("Categories.Disable-Gadgets-Item-Slot");
+        String slotFromConfig = UltraCosmeticsData.get().getPlugin().getConfig().getString("Categories.Gadgets.Disable-Gadgets-Item-Slot");
         int slot;
         if (slotFromConfig.contains("%size%")) {
             String slotToEval = slotFromConfig.replaceAll("%size%", getSize() + "");

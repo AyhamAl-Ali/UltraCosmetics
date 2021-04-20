@@ -23,7 +23,7 @@ import org.bukkit.entity.Player;
 public class SubCommandMenu extends SubCommand {
 
     public SubCommandMenu(UltraCosmetics ultraCosmetics) {
-        super("Opens Specified Menu", "ultracosmetics.command.menu", "/uc menu <menu> [page]", ultraCosmetics, "menu");
+        super("Opens Specified Menu", "ultracosmetics.command.menu", "/cosmetics menu <menu> [page]", ultraCosmetics, "menu");
         //this.menuGadgets = new MenuGadgets(getUltraCosmetics());
     }
 
@@ -99,7 +99,7 @@ public class SubCommandMenu extends SubCommand {
     }
 
     private String getMenuList() {
-        StringBuilder menuList = new StringBuilder(ChatColor.RED + "" + ChatColor.BOLD + "/uc menu <menu>\n" + ChatColor.RED + "" + ChatColor.BOLD + "Invalid Menu\n"
+        StringBuilder menuList = new StringBuilder(ChatColor.RED + "" + ChatColor.BOLD + "/cosmetics menu <menu>\n" + ChatColor.RED + "" + ChatColor.BOLD + "Invalid Menu\n"
                 + ChatColor.RED + "" + ChatColor.BOLD + "Available Menus: main," + (UltraCosmeticsData.get().areTreasureChestsEnabled() ? " buykey," : "")
                 + (SettingsManager.getConfig().getBoolean("Pets-Rename.Enabled") ? " renamepet," : ""));
         for (Category category : Category.enabled()) {

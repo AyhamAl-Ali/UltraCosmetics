@@ -1,4 +1,4 @@
-name: UltraCosmetics
+name: CustomCosmetics
 version: @VERSION@-AYHAM
 author: iSach
 load: POSTWORLD
@@ -6,10 +6,10 @@ main: be.isach.ultracosmetics.UltraCosmetics
 api-version: 1.13
 softdepend: [LibsDisguises, Vault, PlaceholderAPI, PlayerPoints]
 commands:
-  ultracosmetics:
-    aliases: [uc, cosmetics]
-    description: Main Command of Ultra Cosmetics
-    usage: /ultracosmetics
+  cosmetics:
+    aliases: [cosmetic]
+    description: Main Command of Custom Cosmetics
+    usage: /cosmetics
 permissions:
   ultracosmetics.*:
     children:
