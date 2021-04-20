@@ -18,13 +18,22 @@ import org.bukkit.entity.Player;
 public class SubCommandHelp extends SubCommand {
 
     public SubCommandHelp(UltraCosmetics ultraCosmetics) {
-        super("Shows help message", "ultracosmetics.command.help", "/cosmetics help", ultraCosmetics, "help");
+        super("Shows help message", "ultracosmetics.command.help", "/cosmetics help [page]", ultraCosmetics, "help");
         //this.menuGadgets = new MenuGadgets(getUltraCosmetics());
     }
 
     @Override
     protected void onExePlayer(Player sender, String... args) {
-        getUltraCosmetics().getCommandManager().showHelp(sender, 1);
+        String s = args[1].toLowerCase();
+        int page;
+        try {
+            page = Integer.parseInt(s);
+        } catch (Exception e) {
+            page = 1;
+            //sender.sendMessage(ChatColor.RED + "Error: Unknown page number.");
+        }
+
+        getUltraCosmetics().getCommandManager().showHelp(sender, page);
     }
 
     @Override

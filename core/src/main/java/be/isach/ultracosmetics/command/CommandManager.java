@@ -53,8 +53,8 @@ public class CommandManager implements CommandExecutor {
 		commandSender.sendMessage(ChatColor.WHITE + "" + ChatColor.BOLD + "CustomCosmetics Help (/cosmetics <page>) " + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "(" + page + "/" + getMaxPages() + ")");
 		int from = 1;
 		if (page > 1)
-			from = 8 * (page - 1) + 1;
-		int to = 8 * page;
+			from = 10 * (page - 1) + 1;
+		int to = 10 * page;
 		for (int h = from; h <= to; h++) {
 			if (h > commands.size())
 				break;
@@ -69,10 +69,10 @@ public class CommandManager implements CommandExecutor {
 	 * @return the maximum amount of pages.
 	 */
 	private int getMaxPages() {
-		int max = 8;
+		int max = 10;
 		int i = commands.size();
 		if (i % max == 0) return i / max;
-		double j = i / 8;
+		double j = i / 10;
 		int h = (int) Math.floor(j * 100) / 100;
 		return h + 1;
 	}
