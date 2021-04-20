@@ -68,7 +68,7 @@ public class CommandManager implements CommandExecutor {
 	 *
 	 * @return the maximum amount of pages.
 	 */
-	private int getMaxPages() {
+	public int getMaxPages() {
 		int max = 10;
 		int i = commands.size();
 		if (i % max == 0) return i / max;

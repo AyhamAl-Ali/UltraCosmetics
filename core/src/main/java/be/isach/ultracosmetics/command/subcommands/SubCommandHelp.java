@@ -24,13 +24,20 @@ public class SubCommandHelp extends SubCommand {
 
     @Override
     protected void onExePlayer(Player sender, String... args) {
-        String s = args[1].toLowerCase();
-        int page;
-        try {
-            page = Integer.parseInt(s);
-        } catch (Exception e) {
-            page = 1;
-            //sender.sendMessage(ChatColor.RED + "Error: Unknown page number.");
+        int page = 1;
+        if (args.length > 1) {
+            String s = args[1].toLowerCase();
+
+            try {
+                page = Integer.parseInt(s);
+                int max = getUltraCosmetics().getCommandManager().getMaxPages();
+                if (page > max) {
+                    page = max;
+                }
+            } catch (Exception e) {
+                page = 1;
+                //sender.sendMessage(ChatColor.RED + "Error: Unknown page number.");
+            }
         }
 
         getUltraCosmetics().getCommandManager().showHelp(sender, page);
